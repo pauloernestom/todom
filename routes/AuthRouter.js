@@ -1,0 +1,16 @@
+/**
+ * a) Criar uma rota POST para o ENDPOINT/login direcionando a requisição para AuthController.login
+ */
+
+var express = require('express');
+var router = express.Router();
+
+const AuthController = require('../controllers/AuthController');
+
+
+/* GET home page. */
+router.post('/login', AuthController.login);
+
+
+
+module.exports = router;
