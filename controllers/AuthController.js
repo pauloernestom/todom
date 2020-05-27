@@ -1,6 +1,6 @@
-const { Usuario } = require('../models')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const { Usuario } = require('../models');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     
@@ -30,10 +30,14 @@ module.exports = {
 			return res.status(403).json({error:"Login inválido"});
 		}
 
-    
+        // removendo a senha para que ela não seja enviada de volta
+        user.senha = undefined;
+
+        //Criando o token
+        let token = jwt.sign({usuario:user}, "segredo");
 
         //se chegar até aqui: res.status.(200).json({msg:"sucesso!"});
-        return res.status(200).json({msg:"sucesso!"});
+        return res.status(200).json({usuario:user, token});
         
 
     },
